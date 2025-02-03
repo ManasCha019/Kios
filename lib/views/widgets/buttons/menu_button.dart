@@ -9,6 +9,8 @@ class MenuButton extends StatefulWidget {
   final Widget? icon;
   final Color? fontColor;
   final bool useGradient;
+  final double fontSize;
+  final MaterialStateProperty<OutlinedBorder>? customStyle;
 
   const MenuButton({
     super.key,
@@ -20,6 +22,8 @@ class MenuButton extends StatefulWidget {
     this.icon,
     this.fontColor = Colors.white,
     this.useGradient = false,
+    this.fontSize = 48,
+    this.customStyle,
   });
 
   @override
@@ -64,18 +68,14 @@ class _MenuButtonState extends State<MenuButton>
 
   @override
   Widget build(BuildContext context) {
-    final buttonStyle = ElevatedButton.styleFrom(
-      backgroundColor:
-          widget.useGradient ? Colors.transparent : widget.backgroundColor,
-      shadowColor: Colors.black,
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(35),
-      ),
-    );
+    final BorderRadius buttonRadius = widget.customStyle != null
+        ? BorderRadius.only(bottomRight: Radius.circular(8))
+        : BorderRadius.circular(35);
 
     final textStyle = TextStyle(
-        color: widget.fontColor, fontSize: 48, fontWeight: FontWeight.w400);
+        color: widget.fontColor,
+        fontSize: widget.fontSize,
+        fontWeight: FontWeight.w400);
 
     Widget buttonChild = Text(widget.text, style: textStyle);
 
@@ -101,27 +101,28 @@ class _MenuButtonState extends State<MenuButton>
                 width: widget.width,
                 height: widget.height,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35),
+                  borderRadius: buttonRadius,
                   gradient: LinearGradient(
                     colors: [widget.backgroundColor, Colors.black],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
-                    stops: [0.6, 1.0],
+                    stops: const [0.6, 1.0],
                   ),
                 ),
-                child: ElevatedButton(
-                  onPressed: null,
-                  style: buttonStyle,
-                  child: buttonChild,
+                child: Material(
+                  color: Colors.transparent,
+                  borderRadius: buttonRadius,
+                  child: Center(child: buttonChild),
                 ),
               )
             : Container(
                 width: widget.width,
                 height: widget.height,
-                child: ElevatedButton(
-                  onPressed: null,
-                  style: buttonStyle,
-                  child: buttonChild,
+                child: Material(
+                  color: widget.backgroundColor,
+                  borderRadius: buttonRadius,
+                  elevation: 5,
+                  child: Center(child: buttonChild),
                 ),
               ),
       ),

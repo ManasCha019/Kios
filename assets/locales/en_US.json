@@ -2,5 +2,10 @@
     "order_food": "Order Food",
     "change_language": "Language",
     "dine_in": "Dine in",
-    "take_home": "Take home"
+    "take_home": "Take home",
+    "member_no": "Member Number",
+    "skip": "Skip",
+    "ok":"OK"
 }
+
+

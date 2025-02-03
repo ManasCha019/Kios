@@ -1,4 +1,5 @@
 import 'package:Kios/views/pages/begin/begin_order_page.dart';
+import 'package:Kios/views/pages/member/member_no_page.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -7,6 +8,10 @@ class AppRoutes {
     GetPage(
       name: '/begin',
       page: () => const BeginPage(),
+    ),
+    GetPage(
+      name: '/memberNo',
+      page: () => const MemberNoPage(),
     ),
   ];
 }

@@ -2,6 +2,10 @@
     "order_food": "สั่งอาหาร",
     "change_language": "เปลี่ยนภาษา",
     "dine_in": "ทานที่ร้าน",
-    "take_home": "นำกลับ"
+    "take_home": "นำกลับ",
+    "member_no": "หมายเลขสมาชิก",
+    "skip": "ข้าม",
+    "ok": "ตกลง"
+
 
 }

@@ -81,8 +81,9 @@ class _BeginPageState extends State<BeginPage> {
                             text: showOrderOptions
                                 ? 'dine_in'.tr
                                 : 'order_food'.tr,
-                            onPressed: () => setState(
-                                () => showOrderOptions = !showOrderOptions),
+                            onPressed: () => showOrderOptions
+                                ? Get.toNamed('/memberNo')
+                                : setState(() => showOrderOptions = true),
                             backgroundColor: Kios_colorsColors.red,
                             fontColor: Colors.white,
                             useGradient: true,
@@ -107,7 +108,7 @@ class _BeginPageState extends State<BeginPage> {
                       showOrderOptions
                           ? MenuButton(
                               text: 'take_home'.tr,
-                              onPressed: () {},
+                              onPressed: () => Get.toNamed('/memberNo'),
                               useGradient: true,
                               fontColor: Colors.white,
                               backgroundColor: Kios_colorsColors.red,
