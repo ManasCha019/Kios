@@ -7,4 +7,10 @@ class Kios_colorsColors {
     <int, Color>{50: Color(_greenPrimaryValue)},
   );
   static const int _greenPrimaryValue = 0xFF88d049;
+
+  static const MaterialColor red = MaterialColor(
+    _redPrimaryValue,
+    <int, Color>{50: Color(_redPrimaryValue)},
+  );
+  static const int _redPrimaryValue = 0xFF4A1010;
 }
