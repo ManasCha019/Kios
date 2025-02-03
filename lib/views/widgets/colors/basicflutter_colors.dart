@@ -13,4 +13,10 @@ class Kios_colorsColors {
     <int, Color>{50: Color(_redPrimaryValue)},
   );
   static const int _redPrimaryValue = 0xFF4A1010;
+
+  static const MaterialColor yellow = MaterialColor(
+    _yellowPrimaryValue,
+    <int, Color>{50: Color(_yellowPrimaryValue)},
+  );
+  static const int _yellowPrimaryValue = 0xFFFFF2CC;
 }

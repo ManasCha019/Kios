@@ -7,16 +7,17 @@ class MenuButton extends StatelessWidget {
   final double width;
   final double height;
   final Widget? icon;
+  final Color? fontColor;
 
-  const MenuButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    required this.backgroundColor,
-    this.width = 400,
-    this.height = 150,
-    this.icon,
-  });
+  const MenuButton(
+      {super.key,
+      required this.text,
+      required this.onPressed,
+      required this.backgroundColor,
+      this.width = 400,
+      this.height = 150,
+      this.icon,
+      this.fontColor = Colors.black});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +29,8 @@ class MenuButton extends StatelessWidget {
           onPressed: onPressed,
           icon: icon!,
           label: Text(text,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 48,
-                  fontWeight: FontWeight.w400)),
+              style: TextStyle(
+                  color: fontColor, fontSize: 48, fontWeight: FontWeight.w400)),
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
             shape: RoundedRectangleBorder(

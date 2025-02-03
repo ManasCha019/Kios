@@ -15,6 +15,7 @@ class BeginPage extends StatefulWidget {
 class _BeginPageState extends State<BeginPage> {
   late VideoPlayerController _controller;
   final languageController = Get.put(LanguageController());
+  bool showOrderOptions = false;
 
   @override
   void initState() {
@@ -36,7 +37,6 @@ class _BeginPageState extends State<BeginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF4E6),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,22 +63,34 @@ class _BeginPageState extends State<BeginPage> {
                     ),
             ),
             Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF2CC),
-                ),
+              decoration: BoxDecoration(
+                color: Kios_colorsColors.yellow,
+              ),
+              child: SizedBox(
+                height: 0.35 * MediaQuery.of(context).size.width,
                 child: Padding(
                   padding: const EdgeInsets.all(32),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: showOrderOptions
+                        ? CrossAxisAlignment.start
+                        : CrossAxisAlignment.center,
                     children: [
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           MenuButton(
-                            text: 'order_food'.tr,
-                            onPressed: () {},
+                            text: showOrderOptions
+                                ? 'dine_in'.tr
+                                : 'order_food'.tr,
+                            onPressed: () => setState(
+                                () => showOrderOptions = !showOrderOptions),
                             backgroundColor: Kios_colorsColors.red,
+                            fontColor: showOrderOptions ? Colors.white : null,
+                            icon: showOrderOptions
+                                ? const Icon(Icons.restaurant,
+                                    size: 40, color: Colors.white)
+                                : null,
                           ),
                           const SizedBox(height: 15),
                           MenuButton(
@@ -92,13 +104,24 @@ class _BeginPageState extends State<BeginPage> {
                           ),
                         ],
                       ),
-                      Image.asset(
-                        'assets/images/thanvasu_logo.png',
-                        width: 350,
-                      ),
+                      showOrderOptions
+                          ? MenuButton(
+                              text: 'take_home'.tr,
+                              onPressed: () {},
+                              fontColor: Colors.white,
+                              backgroundColor: Kios_colorsColors.red,
+                              icon: const Icon(Icons.takeout_dining,
+                                  size: 40, color: Colors.white),
+                            )
+                          : Image.asset(
+                              'assets/images/thanvasu_logo.png',
+                              width: 400,
+                            ),
                     ],
                   ),
-                ))
+                ),
+              ),
+            )
           ],
         ),
       ),

@@ -1,4 +1,6 @@
 {
     "order_food": "Order Food",
-    "change_language": "Language"
+    "change_language": "Language",
+    "dine_in": "Dine in",
+    "take_home": "Take home"
 }
