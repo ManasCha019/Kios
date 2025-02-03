@@ -86,7 +86,8 @@ class _BeginPageState extends State<BeginPage> {
                             onPressed: () => setState(
                                 () => showOrderOptions = !showOrderOptions),
                             backgroundColor: Kios_colorsColors.red,
-                            fontColor: showOrderOptions ? Colors.white : null,
+                            fontColor: Colors.white,
+                            useGradient: true,
                             icon: showOrderOptions
                                 ? const Icon(Icons.restaurant,
                                     size: 40, color: Colors.white)
@@ -95,6 +96,7 @@ class _BeginPageState extends State<BeginPage> {
                           const SizedBox(height: 15),
                           MenuButton(
                             text: 'change_language'.tr,
+                            fontColor: Colors.black,
                             onPressed: () =>
                                 languageController.changeLanguage(),
                             backgroundColor: Colors.white,
@@ -108,6 +110,7 @@ class _BeginPageState extends State<BeginPage> {
                           ? MenuButton(
                               text: 'take_home'.tr,
                               onPressed: () {},
+                              useGradient: true,
                               fontColor: Colors.white,
                               backgroundColor: Kios_colorsColors.red,
                               icon: const Icon(Icons.takeout_dining,
