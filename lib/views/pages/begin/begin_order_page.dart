@@ -72,9 +72,7 @@ class _BeginPageState extends State<BeginPage> {
                   padding: const EdgeInsets.all(32),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: showOrderOptions
-                        ? CrossAxisAlignment.start
-                        : CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
                         mainAxisSize: MainAxisSize.min,
@@ -116,9 +114,12 @@ class _BeginPageState extends State<BeginPage> {
                               icon: const Icon(Icons.takeout_dining,
                                   size: 40, color: Colors.white),
                             )
-                          : Image.asset(
-                              'assets/images/thanvasu_logo.png',
-                              width: 400,
+                          : Transform.translate(
+                              offset: const Offset(0, -30),
+                              child: Image.asset(
+                                'assets/images/thanvasu_logo.png',
+                                width: 450,
+                              ),
                             ),
                     ],
                   ),
