@@ -4,12 +4,54 @@ import 'package:get/get.dart';
 class MainMenuController extends GetxController {
   final RxString selectedMenu = 'home'.obs;
   final RxInt selectedCategoryIndex = (-1).obs;
+  final RxString selectedFilter = 'all'.obs;
 
   @override
   void onInit() {
     super.onInit();
     selectHome();
   }
+
+  final Map<int, List<Map<String, dynamic>>> categoryFilters = {
+    1: [
+      // สเต็ก
+      {'id': 'all', 'name': 'ทั้งหมด'},
+      {'id': 'beef', 'name': 'เนื้อวัว'},
+      {'id': 'pork', 'name': 'หมู'},
+      {'id': 'lamb', 'name': 'แกะ'},
+    ],
+    2: [
+      // สลัด
+      {'id': 'all', 'name': 'ทั้งหมด'},
+      {'id': 'chicken', 'name': 'ไก่'},
+      {'id': 'seafood', 'name': 'ทะเล'},
+      {'id': 'pork', 'name': 'หมู'},
+      {'id': 'vegan', 'name': 'มังสวิรัติ'},
+    ],
+    3: [
+      // พาสต้า
+      {'id': 'all', 'name': 'ทั้งหมด'},
+      {'id': 'cream', 'name': 'ครีมซอส'},
+      {'id': 'spicy', 'name': 'ผัดขี้เมา'},
+      {'id': 'pesto', 'name': 'เพสโต้'},
+      {'id': 'seafood', 'name': 'ทะเล'},
+    ],
+    4: [
+      // ซุป
+      {'id': 'all', 'name': 'ทั้งหมด'},
+      {'id': 'cream', 'name': 'ครีมซุป'},
+      {'id': 'clear', 'name': 'น้ำใส'},
+      {'id': 'seafood', 'name': 'ทะเล'},
+    ],
+    5: [
+      // เครื่องดื่ม
+      {'id': 'all', 'name': 'ทั้งหมด'},
+      {'id': 'coffee', 'name': 'กาแฟ'},
+      {'id': 'tea', 'name': 'ชา'},
+      {'id': 'frappe', 'name': 'ปั่น'},
+      {'id': 'chocolate', 'name': 'ช็อคโกแลต'},
+    ],
+  };
 
   final RxList<Map<String, dynamic>> categoryItems = [
     {
@@ -52,6 +94,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สเต็ก',
       'catId': 1,
+      'type': 'beef'
     },
     {
       'title': 'ทีโบนสเต็ก',
@@ -59,6 +102,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สเต็ก',
       'catId': 1,
+      'type': 'beef'
     },
     {
       'title': 'เทนเดอร์ลอยสเต็ก',
@@ -66,6 +110,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สเต็ก',
       'catId': 1,
+      'type': 'beef'
     },
     {
       'title': 'พอร์คช็อป',
@@ -73,6 +118,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สเต็ก',
       'catId': 1,
+      'type': 'pork'
     },
     {
       'title': 'แลมบ์ช็อป',
@@ -80,6 +126,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สเต็ก',
       'catId': 1,
+      'type': 'lamb'
     },
 
     // สลัด (Salad) items
@@ -89,6 +136,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สลัด',
       'catId': 2,
+      'type': 'chicken'
     },
     {
       'title': 'กรีกสลัด',
@@ -96,6 +144,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สลัด',
       'catId': 2,
+      'type': 'vegan'
     },
     {
       'title': 'สลัดแซลมอน',
@@ -103,6 +152,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สลัด',
       'catId': 2,
+      'type': 'seafood'
     },
     {
       'title': 'ค็อบสลัด',
@@ -110,6 +160,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สลัด',
       'catId': 2,
+      'type': 'pork'
     },
     {
       'title': 'สลัดไก่ย่าง',
@@ -117,6 +168,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'สลัด',
       'catId': 2,
+      'type': 'chicken'
     },
 
     // พาสต้า (Pasta) items
@@ -126,6 +178,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'พาสต้า',
       'catId': 3,
+      'type': 'cream'
     },
     {
       'title': 'เฟตตูชินีอัลเฟรโด',
@@ -133,6 +186,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'พาสต้า',
       'catId': 3,
+      'type': 'cream'
     },
     {
       'title': 'พาสต้าขี้เมา',
@@ -140,6 +194,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'พาสต้า',
       'catId': 3,
+      'type': 'spicy'
     },
     {
       'title': 'ลิงกวินีเพสโต้',
@@ -147,6 +202,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'พาสต้า',
       'catId': 3,
+      'type': 'pesto'
     },
     {
       'title': 'พาสต้าซีฟู้ด',
@@ -154,6 +210,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'พาสต้า',
       'catId': 3,
+      'type': 'seafood'
     },
 
     // ซุป (Soup) items
@@ -163,6 +220,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'ซุป',
       'catId': 4,
+      'type': 'cream'
     },
     {
       'title': 'ซุปหอมใหญ่',
@@ -170,6 +228,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'ซุป',
       'catId': 4,
+      'type': 'cream'
     },
     {
       'title': 'ซุปข้าวโพด',
@@ -177,6 +236,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'ซุป',
       'catId': 4,
+      'type': 'cream'
     },
     {
       'title': 'ซุปมินิสโตรเน',
@@ -184,6 +244,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'ซุป',
       'catId': 4,
+      'type': 'clear'
     },
     {
       'title': 'ซุปทะเล',
@@ -191,6 +252,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'ซุป',
       'catId': 4,
+      'type': 'seafood'
     },
 
     // เครื่องดื่ม (Beverages) items
@@ -200,6 +262,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'tea'
     },
     {
       'title': 'ชานมไข่มุก',
@@ -207,6 +270,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'tea'
     },
     {
       'title': 'สตรอเบอร์รี่ปั่น',
@@ -214,6 +278,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'frappe'
     },
     {
       'title': 'กาแฟลาเต้',
@@ -221,6 +286,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'coffee'
     },
     {
       'title': 'ช็อคโกแลตเย็น',
@@ -228,6 +294,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'chocolate'
     },
     {
       'title': 'นมสดปั่น',
@@ -235,6 +302,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'frappe'
     },
     {
       'title': 'ชามะนาว',
@@ -242,6 +310,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'tea'
     },
     {
       'title': 'น้ำส้มปั่น',
@@ -249,6 +318,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'frappe'
     },
     {
       'title': 'กาแฟเย็น',
@@ -256,6 +326,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'coffee'
     },
     {
       'title': 'ชาไทย',
@@ -263,6 +334,7 @@ class MainMenuController extends GetxController {
       'imagePath': 'assets/images/exam_menu.png',
       'category': 'เครื่องดื่ม',
       'catId': 5,
+      'type': 'tea'
     },
   ];
   void selectHome() {
@@ -280,6 +352,7 @@ class MainMenuController extends GetxController {
   void selectCategory(int index) {
     selectedMenu.value = 'category';
     selectedCategoryIndex.value = index;
+    selectedFilter.value = 'all';
     update();
   }
 
@@ -300,7 +373,31 @@ class MainMenuController extends GetxController {
     if (selectedMenu.value != 'category' || selectedCategoryIndex.value == -1) {
       return menuItems;
     }
-    final selectedCatId = categoryItems[selectedCategoryIndex.value]['catId'];
-    return menuItems.where((item) => item['catId'] == selectedCatId).toList();
+
+    var items = menuItems
+        .where((item) =>
+            item['catId'] ==
+            categoryItems[selectedCategoryIndex.value]['catId'])
+        .toList();
+
+    if (selectedFilter.value != 'all') {
+      items =
+          items.where((item) => item['type'] == selectedFilter.value).toList();
+    }
+
+    return items;
+  }
+
+  List<Map<String, dynamic>> getCurrentFilters() {
+    if (selectedMenu.value != 'category' || selectedCategoryIndex.value == -1) {
+      return [];
+    }
+    final catId = categoryItems[selectedCategoryIndex.value]['catId'];
+    return categoryFilters[catId] ?? [];
+  }
+
+  void selectFilter(String filterId) {
+    selectedFilter.value = filterId;
+    update();
   }
 }

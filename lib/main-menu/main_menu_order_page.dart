@@ -32,17 +32,74 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                 color: Colors.transparent,
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Image.asset(
                     'assets/images/thanvasu_logo.png',
                     height: 600,
                   ),
-                  const SizedBox(width: 50),
-                  Text(
-                    'main_page'.tr,
-                    style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.w200,
+                  const SizedBox(width: 30),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'main_page'.tr,
+                            style: TextStyle(
+                              fontSize: 48,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              child: GetBuilder<MainMenuController>(
+                                builder: (controller) {
+                                  final filters =
+                                      controller.getCurrentFilters();
+                                  if (filters.isEmpty)
+                                    return const SizedBox.shrink();
+
+                                  return Row(
+                                    children: filters.map((filter) {
+                                      final isSelected =
+                                          controller.selectedFilter.value ==
+                                              filter['id'];
+
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8),
+                                        child: MenuButton(
+                                          text: filter['name'],
+                                          onPressed: () => controller
+                                              .selectFilter(filter['id']),
+                                          backgroundColor: isSelected
+                                              ? Kios_colorsColors.red
+                                              : Colors.white,
+                                          fontColor: isSelected
+                                              ? Colors.white
+                                              : Kios_colorsColors.red,
+                                          width: 120,
+                                          height: 40,
+                                          fontSize: 16,
+                                          borderColor: Kios_colorsColors.red,
+                                          borderWidth: 1,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      );
+                                    }).toList(),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -93,6 +150,7 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                                   isSelected: controller.isNewItemsSelected(),
                                 ),
                               ),
+
                               const SizedBox(height: 24),
                               // Category buttons
                               ListView.builder(
