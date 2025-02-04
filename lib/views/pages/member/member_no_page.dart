@@ -32,7 +32,7 @@ class MemberNoPage extends GetView<MemberNoController> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
-                  color: Kios_colorsColors.white,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: [
                     BoxShadow(
@@ -112,7 +112,7 @@ class MemberNoPage extends GetView<MemberNoController> {
                   child: MenuButton(
                     text: 'skip'.tr,
                     onPressed: () => Get.offNamed('/mainMenuOrder'),
-                    backgroundColor: Kios_colorsColors.white,
+                    backgroundColor: Colors.white,
                     width: 130,
                     height: 50,
                     fontColor: Kios_colorsColors.black,
@@ -184,7 +184,7 @@ class MemberNoPage extends GetView<MemberNoController> {
         backgroundColor: Kios_colorsColors.red,
         width: 60,
         height: 100,
-        fontColor: Kios_colorsColors.white,
+        fontColor: Colors.white,
         fontSize: 20,
         customStyle: WidgetStateProperty.all(
           RoundedRectangleBorder(
