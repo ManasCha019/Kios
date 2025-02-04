@@ -32,11 +32,11 @@ class MemberNoPage extends GetView<MemberNoController> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Kios_colorsColors.white,
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Kios_colorsColors.black.withOpacity(0.1),
                       blurRadius: 4,
                     ),
                   ],
@@ -111,11 +111,11 @@ class MemberNoPage extends GetView<MemberNoController> {
                   padding: const EdgeInsets.only(right: 32),
                   child: MenuButton(
                     text: 'skip'.tr,
-                    onPressed: () => Get.back(),
-                    backgroundColor: Colors.white,
+                    onPressed: () => Get.offNamed('/mainMenuOrder'),
+                    backgroundColor: Kios_colorsColors.white,
                     width: 130,
                     height: 50,
-                    fontColor: Colors.black,
+                    fontColor: Kios_colorsColors.black,
                     useGradient: false,
                     fontSize: 18,
                   ),
@@ -137,7 +137,7 @@ class MemberNoPage extends GetView<MemberNoController> {
         width: 60,
         height: 100,
         elevation: 0,
-        fontColor: Colors.black,
+        fontColor: Kios_colorsColors.black,
         fontSize: 24,
         customStyle: WidgetStateProperty.all(
           RoundedRectangleBorder(
@@ -160,7 +160,7 @@ class MemberNoPage extends GetView<MemberNoController> {
         icon: const Icon(
           Icons.backspace_outlined,
           size: 24,
-          color: Colors.black,
+          color: Kios_colorsColors.black,
         ),
         customStyle: WidgetStateProperty.all(
           RoundedRectangleBorder(
@@ -177,13 +177,14 @@ class MemberNoPage extends GetView<MemberNoController> {
         text: 'ok'.tr,
         onPressed: () {
           if (controller.memberNo.value.length == 9) {
-            Get.back(result: controller.memberNo.value);
+            Get.offNamed('/mainMenuOrder',
+                arguments: controller.memberNo.value);
           }
         },
         backgroundColor: Kios_colorsColors.red,
         width: 60,
         height: 100,
-        fontColor: Colors.white,
+        fontColor: Kios_colorsColors.white,
         fontSize: 20,
         customStyle: WidgetStateProperty.all(
           RoundedRectangleBorder(
@@ -200,14 +201,14 @@ class MemberNoPage extends GetView<MemberNoController> {
     return Container(
       width: 1,
       height: 100,
-      color: Colors.black,
+      color: Kios_colorsColors.black,
     );
   }
 
   Widget _buildHorizontalDivider() {
     return Container(
       height: 1,
-      color: Colors.black,
+      color: Kios_colorsColors.black,
     );
   }
 }

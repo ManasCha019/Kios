@@ -1,3 +1,4 @@
+import 'package:Kios/views/widgets/colors/basicflutter_colors.dart';
 import 'package:flutter/material.dart';
 
 class MenuButton extends StatefulWidget {
@@ -21,7 +22,7 @@ class MenuButton extends StatefulWidget {
     this.width = 400,
     this.height = 150,
     this.icon,
-    this.fontColor = Colors.white,
+    this.fontColor = Kios_colorsColors.white,
     this.useGradient = false,
     this.fontSize = 48,
     this.customStyle,
@@ -105,7 +106,7 @@ class _MenuButtonState extends State<MenuButton>
                 decoration: BoxDecoration(
                   borderRadius: buttonRadius,
                   gradient: LinearGradient(
-                    colors: [widget.backgroundColor, Colors.black],
+                    colors: [widget.backgroundColor, Kios_colorsColors.black],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     stops: const [0.6, 1.0],
