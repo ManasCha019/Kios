@@ -60,68 +60,82 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                     ),
                     child: Column(
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Kios_colorsColors.red,
-                            borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(12)),
-                          ),
-                          child: SideMenuButton(
-                            text: 'main_page'.tr,
-                            icon: Icons.home,
-                            onPressed: () {},
-                            isSelected: true,
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.only(
-                                bottomRight: Radius.circular(12)),
-                          ),
-                          child: SideMenuButton(
-                            text: 'new_items'.tr,
-                            icon: Icons.star_border,
-                            onPressed: () {},
-                          ),
-                        ),
-                        const SizedBox(height: 24),
                         GetBuilder<MainMenuController>(
-                          builder: (controller) => ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: controller.categoryItems.length,
-                            itemBuilder: (context, index) {
-                              final menuItem = controller.categoryItems[index];
-
-                              BorderRadius? borderRadius;
-                              if (index == 0) {
-                                borderRadius = BorderRadius.only(
-                                    topRight: Radius.circular(12));
-                              } else if (index ==
-                                  controller.categoryItems.length - 1) {
-                                borderRadius = BorderRadius.only(
-                                    bottomRight: Radius.circular(12));
-                              }
-
-                              return Container(
+                          builder: (controller) => Column(
+                            children: [
+                              Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: borderRadius,
-                                  border: Border(
-                                    bottom:
-                                        BorderSide(color: Colors.grey.shade200),
-                                  ),
+                                  color: controller.isHomeSelected()
+                                      ? Kios_colorsColors.red
+                                      : Colors.white,
+                                  borderRadius: const BorderRadius.only(
+                                      topRight: Radius.circular(12)),
                                 ),
                                 child: SideMenuButton(
-                                  text: menuItem['name'],
-                                  icon: menuItem['icon'],
-                                  onPressed: () {
-                                    controller.selectedIndex.value = index;
-                                    menuItem['onPressed']();
-                                  },
+                                  text: 'main_page'.tr,
+                                  icon: Icons.home,
+                                  onPressed: () => controller.selectHome(),
+                                  isSelected: controller.isHomeSelected(),
                                 ),
-                              );
-                            },
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: controller.isNewItemsSelected()
+                                      ? Kios_colorsColors.red
+                                      : Colors.white,
+                                  borderRadius: const BorderRadius.only(
+                                      bottomRight: Radius.circular(12)),
+                                ),
+                                child: SideMenuButton(
+                                  text: 'new_items'.tr,
+                                  icon: Icons.star_border,
+                                  onPressed: () => controller.selectNewItems(),
+                                  isSelected: controller.isNewItemsSelected(),
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              // Category buttons
+                              ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: controller.categoryItems.length,
+                                itemBuilder: (context, index) {
+                                  final menuItem =
+                                      controller.categoryItems[index];
+
+                                  BorderRadius? borderRadius;
+                                  if (index == 0) {
+                                    borderRadius = BorderRadius.only(
+                                        topRight: Radius.circular(12));
+                                  } else if (index ==
+                                      controller.categoryItems.length - 1) {
+                                    borderRadius = BorderRadius.only(
+                                        bottomRight: Radius.circular(12));
+                                  }
+
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      color:
+                                          controller.isCategorySelected(index)
+                                              ? Kios_colorsColors.red
+                                              : Colors.white,
+                                      borderRadius: borderRadius,
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.grey.shade200),
+                                      ),
+                                    ),
+                                    child: SideMenuButton(
+                                      text: menuItem['name'],
+                                      icon: menuItem['icon'],
+                                      isSelected:
+                                          controller.isCategorySelected(index),
+                                      onPressed: () =>
+                                          controller.selectCategory(index),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
                         const Spacer(),
@@ -155,9 +169,10 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                               mainAxisSpacing: 16.0,
                               childAspectRatio: 0.7,
                             ),
-                            itemCount: controller.menuItems.length,
+                            itemCount: controller.getFilteredItems().length,
                             itemBuilder: (context, index) {
-                              final menuItem = controller.menuItems[index];
+                              final menuItem =
+                                  controller.getFilteredItems()[index];
                               return MenuCard(
                                 title: menuItem['title'],
                                 price: menuItem['price'],
