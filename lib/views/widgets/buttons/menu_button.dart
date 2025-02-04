@@ -10,7 +10,8 @@ class MenuButton extends StatefulWidget {
   final Color? fontColor;
   final bool useGradient;
   final double fontSize;
-  final MaterialStateProperty<OutlinedBorder>? customStyle;
+  final double elevation;
+  final WidgetStateProperty<OutlinedBorder>? customStyle;
 
   const MenuButton({
     super.key,
@@ -24,6 +25,7 @@ class MenuButton extends StatefulWidget {
     this.useGradient = false,
     this.fontSize = 48,
     this.customStyle,
+    this.elevation = 5,
   });
 
   @override
@@ -121,7 +123,7 @@ class _MenuButtonState extends State<MenuButton>
                 child: Material(
                   color: widget.backgroundColor,
                   borderRadius: buttonRadius,
-                  elevation: 5,
+                  elevation: widget.elevation,
                   child: Center(child: buttonChild),
                 ),
               ),

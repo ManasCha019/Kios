@@ -130,14 +130,18 @@ class MemberNoPage extends GetView<MemberNoController> {
 
   Widget _buildNumberButton(String number) {
     return Expanded(
-      child: InkWell(
-        onTap: () => controller.addNumber(number),
-        child: Container(
-          height: 100,
-          alignment: Alignment.center,
-          child: Text(
-            number,
-            style: const TextStyle(fontSize: 24),
+      child: MenuButton(
+        text: number,
+        onPressed: () => controller.addNumber(number),
+        backgroundColor: Kios_colorsColors.yellow,
+        width: 60,
+        height: 100,
+        elevation: 0,
+        fontColor: Colors.black,
+        fontSize: 24,
+        customStyle: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
           ),
         ),
       ),
@@ -146,14 +150,21 @@ class MemberNoPage extends GetView<MemberNoController> {
 
   Widget _buildActionButton() {
     return Expanded(
-      child: InkWell(
-        onTap: () => controller.delete(),
-        child: Container(
-          height: 100,
-          alignment: Alignment.center,
-          child: const Icon(
-            Icons.backspace_outlined,
-            size: 24,
+      child: MenuButton(
+        text: '',
+        onPressed: () => controller.delete(),
+        backgroundColor: Kios_colorsColors.yellow,
+        width: 60,
+        height: 100,
+        elevation: 0,
+        icon: const Icon(
+          Icons.backspace_outlined,
+          size: 24,
+          color: Colors.black,
+        ),
+        customStyle: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
           ),
         ),
       ),
