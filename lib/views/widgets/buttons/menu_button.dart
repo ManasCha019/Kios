@@ -1,3 +1,4 @@
+import 'package:Kios/views/widgets/colors/basicflutter_colors.dart';
 import 'package:flutter/material.dart';
 
 class MenuButton extends StatefulWidget {
@@ -10,7 +11,11 @@ class MenuButton extends StatefulWidget {
   final Color? fontColor;
   final bool useGradient;
   final double fontSize;
-  final MaterialStateProperty<OutlinedBorder>? customStyle;
+  final double elevation;
+  final Color? borderColor;
+  final double borderWidth;
+  final BorderRadius? borderRadius;
+  final WidgetStateProperty<OutlinedBorder>? customStyle;
 
   const MenuButton({
     super.key,
@@ -20,10 +25,14 @@ class MenuButton extends StatefulWidget {
     this.width = 400,
     this.height = 150,
     this.icon,
-    this.fontColor = Colors.white,
+    this.fontColor = Kios_colorsColors.white,
     this.useGradient = false,
     this.fontSize = 48,
     this.customStyle,
+    this.elevation = 5,
+    this.borderColor,
+    this.borderWidth = 1.0,
+    this.borderRadius,
   });
 
   @override
@@ -68,14 +77,16 @@ class _MenuButtonState extends State<MenuButton>
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadius buttonRadius = widget.customStyle != null
-        ? BorderRadius.only(bottomRight: Radius.circular(8))
-        : BorderRadius.circular(35);
+    final BorderRadius buttonRadius = widget.borderRadius ??
+        (widget.customStyle != null
+            ? BorderRadius.only(bottomRight: Radius.circular(8))
+            : BorderRadius.circular(35));
 
     final textStyle = TextStyle(
-        color: widget.fontColor,
-        fontSize: widget.fontSize,
-        fontWeight: FontWeight.w400);
+      color: widget.fontColor,
+      fontSize: widget.fontSize,
+      fontWeight: FontWeight.w400,
+    );
 
     Widget buttonChild = Text(widget.text, style: textStyle);
 
@@ -103,11 +114,17 @@ class _MenuButtonState extends State<MenuButton>
                 decoration: BoxDecoration(
                   borderRadius: buttonRadius,
                   gradient: LinearGradient(
-                    colors: [widget.backgroundColor, Colors.black],
+                    colors: [widget.backgroundColor, Kios_colorsColors.black],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     stops: const [0.6, 1.0],
                   ),
+                  border: widget.borderColor != null
+                      ? Border.all(
+                          color: widget.borderColor!,
+                          width: widget.borderWidth,
+                        )
+                      : null,
                 ),
                 child: Material(
                   color: Colors.transparent,
@@ -118,10 +135,19 @@ class _MenuButtonState extends State<MenuButton>
             : Container(
                 width: widget.width,
                 height: widget.height,
+                decoration: BoxDecoration(
+                  borderRadius: buttonRadius,
+                  border: widget.borderColor != null
+                      ? Border.all(
+                          color: widget.borderColor!,
+                          width: widget.borderWidth,
+                        )
+                      : null,
+                ),
                 child: Material(
                   color: widget.backgroundColor,
                   borderRadius: buttonRadius,
-                  elevation: 5,
+                  elevation: widget.elevation,
                   child: Center(child: buttonChild),
                 ),
               ),

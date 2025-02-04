@@ -5,7 +5,11 @@
     "take_home": "Take home",
     "member_no": "Member Number",
     "skip": "Skip",
-    "ok":"OK"
+    "ok":"OK",
+    "main_page": "Main Page",
+    "new_items": "New Items",
+    "cancel_order": "Cancel Order",
+    "payment": "Pay"
 }
 
 

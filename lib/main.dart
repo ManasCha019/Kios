@@ -1,4 +1,6 @@
+import 'package:Kios/controllers/main_menu_controller.dart';
 import 'package:Kios/translations/app_translations.dart';
+import 'package:Kios/views/widgets/colors/basicflutter_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'routes/app_routes.dart';
@@ -7,6 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final translations = AppTranslations();
   final trans = await translations.init();
+  Get.put(MainMenuController());
   runApp(MyApp(translations: trans));
 }
 
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Inter',
         textTheme: ThemeData.light().textTheme.apply(
-              bodyColor: Colors.black,
+              bodyColor: Kios_colorsColors.black,
               fontFamily: 'NotoSansThai',
             ),
       ),

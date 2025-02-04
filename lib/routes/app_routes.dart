@@ -1,3 +1,4 @@
+import 'package:Kios/main-menu/main_menu_order_page.dart';
 import 'package:Kios/views/pages/begin/begin_order_page.dart';
 import 'package:Kios/views/pages/member/member_no_page.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,10 @@ class AppRoutes {
     GetPage(
       name: '/memberNo',
       page: () => const MemberNoPage(),
+    ),
+    GetPage(
+      name: '/mainMenuOrder',
+      page: () => const MainMenuOrderPage(),
     ),
   ];
 }

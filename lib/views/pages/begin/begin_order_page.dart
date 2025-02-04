@@ -56,7 +56,7 @@ class _BeginPageState extends State<BeginPage> {
                       ),
                     )
                   : Container(
-                      color: Colors.black,
+                      color: Kios_colorsColors.black,
                       child: const Center(
                         child: CircularProgressIndicator(),
                       ),
@@ -85,23 +85,23 @@ class _BeginPageState extends State<BeginPage> {
                                 ? Get.toNamed('/memberNo')
                                 : setState(() => showOrderOptions = true),
                             backgroundColor: Kios_colorsColors.red,
-                            fontColor: Colors.white,
+                            fontColor: Kios_colorsColors.white,
                             useGradient: true,
                             icon: showOrderOptions
                                 ? const Icon(Icons.restaurant,
-                                    size: 40, color: Colors.white)
+                                    size: 40, color: Kios_colorsColors.white)
                                 : null,
                           ),
                           const SizedBox(height: 15),
                           MenuButton(
                             text: 'change_language'.tr,
-                            fontColor: Colors.black,
+                            fontColor: Kios_colorsColors.black,
                             onPressed: () =>
                                 languageController.changeLanguage(),
-                            backgroundColor: Colors.white,
+                            backgroundColor: Kios_colorsColors.white,
                             height: 100,
                             icon: const Icon(Icons.translate,
-                                size: 40, color: Colors.black),
+                                size: 40, color: Kios_colorsColors.black),
                           ),
                         ],
                       ),
@@ -110,10 +110,10 @@ class _BeginPageState extends State<BeginPage> {
                               text: 'take_home'.tr,
                               onPressed: () => Get.toNamed('/memberNo'),
                               useGradient: true,
-                              fontColor: Colors.white,
+                              fontColor: Kios_colorsColors.white,
                               backgroundColor: Kios_colorsColors.red,
                               icon: const Icon(Icons.takeout_dining,
-                                  size: 40, color: Colors.white),
+                                  size: 40, color: Kios_colorsColors.white),
                             )
                           : Transform.translate(
                               offset: const Offset(0, -30),

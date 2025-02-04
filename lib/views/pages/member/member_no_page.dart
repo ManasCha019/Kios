@@ -36,7 +36,7 @@ class MemberNoPage extends GetView<MemberNoController> {
                   borderRadius: BorderRadius.circular(25),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Kios_colorsColors.black.withOpacity(0.1),
                       blurRadius: 4,
                     ),
                   ],
@@ -111,11 +111,11 @@ class MemberNoPage extends GetView<MemberNoController> {
                   padding: const EdgeInsets.only(right: 32),
                   child: MenuButton(
                     text: 'skip'.tr,
-                    onPressed: () => Get.back(),
+                    onPressed: () => Get.offNamed('/mainMenuOrder'),
                     backgroundColor: Colors.white,
                     width: 130,
                     height: 50,
-                    fontColor: Colors.black,
+                    fontColor: Kios_colorsColors.black,
                     useGradient: false,
                     fontSize: 18,
                   ),
@@ -130,14 +130,18 @@ class MemberNoPage extends GetView<MemberNoController> {
 
   Widget _buildNumberButton(String number) {
     return Expanded(
-      child: InkWell(
-        onTap: () => controller.addNumber(number),
-        child: Container(
-          height: 100,
-          alignment: Alignment.center,
-          child: Text(
-            number,
-            style: const TextStyle(fontSize: 24),
+      child: MenuButton(
+        text: number,
+        onPressed: () => controller.addNumber(number),
+        backgroundColor: Kios_colorsColors.yellow,
+        width: 60,
+        height: 100,
+        elevation: 0,
+        fontColor: Kios_colorsColors.black,
+        fontSize: 24,
+        customStyle: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
           ),
         ),
       ),
@@ -146,14 +150,21 @@ class MemberNoPage extends GetView<MemberNoController> {
 
   Widget _buildActionButton() {
     return Expanded(
-      child: InkWell(
-        onTap: () => controller.delete(),
-        child: Container(
-          height: 100,
-          alignment: Alignment.center,
-          child: const Icon(
-            Icons.backspace_outlined,
-            size: 24,
+      child: MenuButton(
+        text: '',
+        onPressed: () => controller.delete(),
+        backgroundColor: Kios_colorsColors.yellow,
+        width: 60,
+        height: 100,
+        elevation: 0,
+        icon: const Icon(
+          Icons.backspace_outlined,
+          size: 24,
+          color: Kios_colorsColors.black,
+        ),
+        customStyle: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
           ),
         ),
       ),
@@ -166,7 +177,8 @@ class MemberNoPage extends GetView<MemberNoController> {
         text: 'ok'.tr,
         onPressed: () {
           if (controller.memberNo.value.length == 9) {
-            Get.back(result: controller.memberNo.value);
+            Get.offNamed('/mainMenuOrder',
+                arguments: controller.memberNo.value);
           }
         },
         backgroundColor: Kios_colorsColors.red,
@@ -189,14 +201,14 @@ class MemberNoPage extends GetView<MemberNoController> {
     return Container(
       width: 1,
       height: 100,
-      color: Colors.black,
+      color: Kios_colorsColors.black,
     );
   }
 
   Widget _buildHorizontalDivider() {
     return Container(
       height: 1,
-      color: Colors.black,
+      color: Kios_colorsColors.black,
     );
   }
 }
