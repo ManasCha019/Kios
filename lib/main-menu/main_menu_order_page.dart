@@ -2,7 +2,9 @@ import 'package:Kios/controllers/language_controller.dart';
 import 'package:Kios/controllers/main_menu_controller.dart';
 import 'package:Kios/views/widgets/buttons/menu_button.dart';
 import 'package:Kios/views/widgets/buttons/side_menu_button.dart';
+import 'package:Kios/views/widgets/cards/menu_card_widget.dart';
 import 'package:Kios/views/widgets/colors/basicflutter_colors.dart';
+import 'package:Kios/views/widgets/icons/badge_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -87,16 +89,16 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                         GetBuilder<MainMenuController>(
                           builder: (controller) => ListView.builder(
                             shrinkWrap: true,
-                            itemCount: controller.menuItems.length,
+                            itemCount: controller.categoryItems.length,
                             itemBuilder: (context, index) {
-                              final menuItem = controller.menuItems[index];
+                              final menuItem = controller.categoryItems[index];
 
                               BorderRadius? borderRadius;
                               if (index == 0) {
                                 borderRadius = BorderRadius.only(
                                     topRight: Radius.circular(12));
                               } else if (index ==
-                                  controller.menuItems.length - 1) {
+                                  controller.categoryItems.length - 1) {
                                 borderRadius = BorderRadius.only(
                                     bottomRight: Radius.circular(12));
                               }
@@ -140,16 +142,41 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      // Content area
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 16.0),
+                      child: GetBuilder<MainMenuController>(
+                        builder: (controller) {
+                          return GridView.builder(
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 16.0,
+                              mainAxisSpacing: 16.0,
+                              childAspectRatio: 0.7,
+                            ),
+                            itemCount: controller.menuItems.length,
+                            itemBuilder: (context, index) {
+                              final menuItem = controller.menuItems[index];
+                              return MenuCard(
+                                title: menuItem['title'],
+                                price: menuItem['price'],
+                                imagePath: menuItem['imagePath'],
+                                onTap: () {
+                                  // Handle tap
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             Container(
-              height: 80,
+              height: 0.07 * MediaQuery.of(context).size.height,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -165,23 +192,16 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.shopping_cart),
-                      const SizedBox(width: 4),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Kios_colorsColors.yellow,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text('3'),
+                      BadgeIcon(
+                        count: '3',
+                        icon: Icons.shopping_cart_outlined,
+                        showBorder: true,
                       ),
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 20),
                       Text(
                         '฿ 750',
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
                         ),
                       ),
                     ],
@@ -191,10 +211,10 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                     text: 'cancel_order'.tr,
                     onPressed: () {},
                     backgroundColor: Kios_colorsColors.white,
-                    width: 150,
-                    height: 50,
+                    width: 230,
+                    height: 80,
                     fontColor: Kios_colorsColors.red,
-                    fontSize: 16,
+                    fontSize: 25,
                     borderColor: Kios_colorsColors.red,
                     borderRadius: BorderRadius.circular(50),
                     borderWidth: 2.0,
@@ -204,10 +224,11 @@ class _MainMenuOrderPageState extends State<MainMenuOrderPage> {
                     text: 'payment'.tr,
                     onPressed: () {},
                     backgroundColor: Kios_colorsColors.red,
-                    width: 150,
-                    height: 50,
+                    useGradient: true,
+                    width: 230,
+                    height: 80,
                     fontColor: Kios_colorsColors.white,
-                    fontSize: 16,
+                    fontSize: 25,
                   ),
                 ],
               ),

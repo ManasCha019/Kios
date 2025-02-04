@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Kios_colorsColors {
   Kios_colorsColors._();
-  
+
   static const MaterialColor green = MaterialColor(
     _greenPrimaryValue,
     <int, Color>{50: Color(_greenPrimaryValue)},
@@ -17,7 +17,7 @@ class Kios_colorsColors {
 
   static const MaterialColor yellow = MaterialColor(
     _yellowPrimaryValue,
-    <int, Color>{50: Color(_yellowPrimaryValue)},
+    <int, Color>{50: Color(_yellowPrimaryValue), 100: Color(0XFFFFC72C)},
   );
   static const int _yellowPrimaryValue = 0xFFFFF2CC;
 
