@@ -12,6 +12,9 @@ class MenuButton extends StatefulWidget {
   final bool useGradient;
   final double fontSize;
   final double elevation;
+  final Color? borderColor;
+  final double borderWidth;
+  final BorderRadius? borderRadius;
   final WidgetStateProperty<OutlinedBorder>? customStyle;
 
   const MenuButton({
@@ -27,6 +30,9 @@ class MenuButton extends StatefulWidget {
     this.fontSize = 48,
     this.customStyle,
     this.elevation = 5,
+    this.borderColor,
+    this.borderWidth = 1.0,
+    this.borderRadius,
   });
 
   @override
@@ -71,14 +77,16 @@ class _MenuButtonState extends State<MenuButton>
 
   @override
   Widget build(BuildContext context) {
-    final BorderRadius buttonRadius = widget.customStyle != null
-        ? BorderRadius.only(bottomRight: Radius.circular(8))
-        : BorderRadius.circular(35);
+    final BorderRadius buttonRadius = widget.borderRadius ??
+        (widget.customStyle != null
+            ? BorderRadius.only(bottomRight: Radius.circular(8))
+            : BorderRadius.circular(35));
 
     final textStyle = TextStyle(
-        color: widget.fontColor,
-        fontSize: widget.fontSize,
-        fontWeight: FontWeight.w400);
+      color: widget.fontColor,
+      fontSize: widget.fontSize,
+      fontWeight: FontWeight.w400,
+    );
 
     Widget buttonChild = Text(widget.text, style: textStyle);
 
@@ -111,6 +119,12 @@ class _MenuButtonState extends State<MenuButton>
                     end: Alignment.centerRight,
                     stops: const [0.6, 1.0],
                   ),
+                  border: widget.borderColor != null
+                      ? Border.all(
+                          color: widget.borderColor!,
+                          width: widget.borderWidth,
+                        )
+                      : null,
                 ),
                 child: Material(
                   color: Colors.transparent,
@@ -121,6 +135,15 @@ class _MenuButtonState extends State<MenuButton>
             : Container(
                 width: widget.width,
                 height: widget.height,
+                decoration: BoxDecoration(
+                  borderRadius: buttonRadius,
+                  border: widget.borderColor != null
+                      ? Border.all(
+                          color: widget.borderColor!,
+                          width: widget.borderWidth,
+                        )
+                      : null,
+                ),
                 child: Material(
                   color: widget.backgroundColor,
                   borderRadius: buttonRadius,
